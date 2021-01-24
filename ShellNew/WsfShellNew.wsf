@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='Shift_JIS' ?>
+<package>
+	<job id="new">
+		<description></description>
+		<object id="Shell" progid="WScript.Shell"/>
+		<object id="ShellApp" progid="Shell.Application"/>
+		<object id="fso" progid="Scripting.FileSystemObject"/>
+		<object id="dom" progid="Msxml2.DOMDocument"/>
+		<object id="Network" progid="WScript.Network"/>
+		<script language="VBScript">
+<![CDATA[
+			Option Explicit
+]]>
+		</script>
+	</job>
+</package>

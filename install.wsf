@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<package>
+	<job id="ShellNew">
+		<runtime>
+			<description>コンテキストの新規作成にwsfを追加する。</description>
+		</runtime>
+		<object id="Shell" progid="WScript.Shell"/>
+		<object id="ShellApp" progid="Shell.Application"/>
+		<object id="fso" progid="Scripting.FileSystemObject"/>
+
+		<script language="VBScript">
+<![CDATA[
+			Option Explicit
+
+			' スクリプトの情報
+			Dim ScriptName:	ScriptName = WScript.ScriptFullName
+
+			Dim uac: uac = WScript.Arguments.Named.Exists("uac")
+			if Not uac Then
+				Dim arg: arg = """" & ScriptName & """ /uac"
+				ShellApp.ShellExecute WScript.FullName, arg, "", "runas", 1
+				WScript.Quit 0
+			End If
+
+			Dim ScriptPath: ScriptPath = fso.GetParentFolderName(ScriptName)
+			Dim NewFile: NewFile = fso.BuildPath(ScriptPath, "ShellNew\WsfShellNew.wsf")
+
+			Shell.RegWrite "HKCR\.wsf\ShellNew\FileName", NewFile, "REG_SZ"
+
+			WScript.Quit
+]]>
+		</script>
+	</job>
+
+</package>
